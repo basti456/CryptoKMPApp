@@ -1,0 +1,16 @@
+CREATE TABLE Favorite (
+    coinId TEXT NOT NULL PRIMARY KEY,
+    addedAt INTEGER NOT NULL
+);
+
+insertFavorite:
+INSERT OR REPLACE INTO Favorite(coinId, addedAt) VALUES (?, ?);
+
+removeFavorite:
+DELETE FROM Favorite WHERE coinId = ?;
+
+getAllFavoriteIds:
+SELECT coinId FROM Favorite ORDER BY addedAt DESC;
+
+isFavorite:
+SELECT COUNT(*) FROM Favorite WHERE coinId = ?;

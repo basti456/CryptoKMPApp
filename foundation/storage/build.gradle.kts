@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.androidLint)
+    id("app.cash.sqldelight") version "2.3.2"
 }
 
 kotlin {
@@ -64,7 +65,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
+                implementation(libs.coroutines.extensions1)
             }
         }
 
@@ -76,9 +77,13 @@ kotlin {
 
         androidMain {
             dependencies {
-                // Add Android-specific dependencies here. Note that this source set depends on
-                // commonMain by default and will correctly pull the Android artifacts of any KMP
-                // dependencies declared in commonMain.
+                implementation(libs.android.driver)
+            }
+        }
+
+        nativeMain {
+            dependencies {
+                implementation(libs.native.driver)
             }
         }
 
@@ -101,4 +106,13 @@ kotlin {
         }
     }
 
+}
+
+sqldelight {
+    databases {
+        register("CryptoDatabase") {
+            packageName.set("com.example.storage.database")
+        }
+    }
+    linkSqlite.set(true)
 }

@@ -1,0 +1,57 @@
+CREATE TABLE Crypto (
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    symbol TEXT NOT NULL,
+    icon TEXT NOT NULL,
+    price REAL NOT NULL,
+    change24h REAL NOT NULL,
+    change7d REAL NOT NULL,
+    change30d REAL NOT NULL,
+    marketCap INTEGER NOT NULL,
+    volume24h INTEGER NOT NULL,
+    circulatingSupply INTEGER NOT NULL,
+    rank INTEGER NOT NULL,
+    ath REAL NOT NULL,
+    description TEXT NOT NULL,
+    sparkline TEXT NOT NULL,
+    chartData TEXT NOT NULL,
+    updatedAt INTEGER NOT NULL
+);
+
+CREATE INDEX index_Crypto_name ON Crypto(name);
+CREATE INDEX index_Crypto_symbol ON Crypto(symbol);
+
+insertOrReplaceCrypto:
+INSERT OR REPLACE INTO Crypto(
+    id, name, symbol, icon, price, change24h, change7d, change30d,
+    marketCap, volume24h, circulatingSupply, rank, ath,
+    description, sparkline, chartData, updatedAt
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+getAllCryptos:
+SELECT * FROM Crypto ORDER BY rank ASC;
+
+getCryptosPaged:
+SELECT * FROM Crypto ORDER BY rank ASC, id ASC LIMIT ? OFFSET ?;
+
+getCryptosLimited:
+SELECT * FROM Crypto ORDER BY rank ASC, id ASC LIMIT ?;
+
+getCryptoById:
+SELECT * FROM Crypto WHERE id = ?;
+
+searchCryptos:
+SELECT * FROM Crypto
+WHERE LOWER(name) LIKE ? OR LOWER(symbol) LIKE ?
+ORDER BY rank ASC;
+
+countCryptos:
+SELECT COUNT(*) FROM Crypto;
+
+getMaxUpdatedAt:
+SELECT MAX(updatedAt) AS maxUpdatedAt FROM Crypto;
+
+getFavoriteCryptos:
+SELECT Crypto.* FROM Crypto
+INNER JOIN Favorite ON Crypto.id = Favorite.coinId
+ORDER BY Favorite.addedAt DESC;
