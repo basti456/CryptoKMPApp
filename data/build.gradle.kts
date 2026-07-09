@@ -68,6 +68,7 @@ kotlin {
                 implementation(projects.foundation.network)
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.ktor.client.core)
+                implementation(projects.domain)
                 // Add KMP dependencies here
             }
         }

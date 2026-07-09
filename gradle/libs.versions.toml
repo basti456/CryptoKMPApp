@@ -17,8 +17,10 @@ material3 = "1.11.0-alpha07"
 kotlinStdlib = "2.4.0"
 runner = "1.7.0"
 core = "1.7.0"
+coroutinesVersion = "1.11.0"
 ktorClientOkhttp = "3.5.0"
 kotlinxSerializationJson = "1.11.0"
+datastorePreferences = "1.2.1"
 
 [libraries]
 android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "androidDriver" }
@@ -57,6 +59,11 @@ ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "kto
 ktor-client-websockets = { module = "io.ktor:ktor-client-websockets", version.ref = "ktorClientOkhttp" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClientOkhttp" }
 native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "androidDriver" }
+
+kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutinesVersion" }
+
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
